@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="33.0" layoutX="585.0" layoutY="492.0" stroke="#ffffff00" strokeType="INSIDE" width="83.0" />
+      <JFXTextField layoutX="14.0" layoutY="134.0" prefHeight="33.0" prefWidth="240.0" promptText="Name">
+         <font>
+            <Font name="Product Sans Light" size="15.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="14.0" layoutY="14.0" text="Create your account">
+         <font>
+            <Font name="Product Sans Medium" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="60.0" text="Enter your details">
+         <font>
+            <Font name="Product Sans Light" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField layoutX="14.0" layoutY="194.0" prefHeight="25.0" prefWidth="240.0" promptText="Email">
+         <font>
+            <Font name="Product Sans Light" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton layoutX="585.0" layoutY="488.0" prefHeight="29.0" prefWidth="83.0" text="Done" textFill="WHITE">
+         <font>
+            <Font name="Product Sans Medium" size="21.0" />
+         </font>
+      </JFXButton>
+      <JFXPasswordField layoutX="14.0" layoutY="248.0" prefHeight="25.0" prefWidth="240.0" promptText="Type password">
+         <font>
+            <Font name="Product Sans Light" size="15.0" />
+         </font>
+      </JFXPasswordField>
+      <JFXPasswordField layoutX="14.0" layoutY="308.0" prefHeight="25.0" prefWidth="240.0" promptText="Re-type password">
+         <font>
+            <Font name="Product Sans Light" size="15.0" />
+         </font>
+      </JFXPasswordField>
+      <ImageView fitHeight="286.0" fitWidth="376.0" layoutX="300.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatar.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
