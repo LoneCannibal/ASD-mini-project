@@ -50,7 +50,7 @@
             <Image url="@avatar.jpg" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="username_create" layoutX="14.0" layoutY="195.0" prefHeight="25.0" prefWidth="240.0" promptText="Choose username">
+      <JFXTextField fx:id="username_create" layoutX="14.0" layoutY="191.0" prefHeight="25.0" prefWidth="240.0" promptText="Choose username">
          <font>
             <Font name="Product Sans Light" size="15.0" />
          </font>
