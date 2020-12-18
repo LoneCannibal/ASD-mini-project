@@ -1,18 +1,14 @@
 package sample;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.event.ActionEvent;
-
 import javafx.scene.control.*;
-
-import java.awt.event.ItemEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,7 +23,10 @@ public class SampleController {
     public JFXTextField username;
     public JFXPasswordField password;
     public Label wrong_password;
-
+    Connection conn;
+    Statement stmt;
+    String sql;
+    ResultSet rs;
 
     public void exit(ActionEvent ae)
     {
@@ -38,28 +37,40 @@ public class SampleController {
         create();
     }
 
-    public void login(ActionEvent ae)
+    public void login(ActionEvent ae) throws Exception
     {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mini_project", "root", "password");
-            Statement stmt = conn.createStatement();
-            String sql = "SELECT `password` FROM `user` WHERE `password` LIKE ";
-            sql=sql+"'"+ password.getText()+"' AND `username` LIKE '"+username.getText()+"'";
-            ResultSet rs = stmt.executeQuery(sql);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mini_project", "root", "password");
+            stmt = conn.createStatement();
+            sql = "SELECT `password` FROM `user` WHERE `password` LIKE ";
+            sql=sql+"'"+ password.getText()+"' AND `username` LIKE '"+username.getText()+"';";
+            rs = stmt.executeQuery(sql);
             if(rs.next()==false)
             {
                 password.setText("");
                 wrong_password.setText("Wrong  username or password");
             }
-            else
+            else //DISPLAY
             {
-                Stage primaryStage=new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("user_details.fxml"));
-                primaryStage.initStyle(StageStyle.UTILITY);
-                primaryStage.setTitle("User details");
-                primaryStage.setScene(new Scene(root, 700, 320));
-                primaryStage.show();
+
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mini_project", "root", "password");
+                stmt = conn.createStatement();
+                sql="SELECT `username`, `name`, `email` FROM `user` WHERE `username` LIKE ";
+                sql=sql+"'"+username.getText()+"';";
+                rs = stmt.executeQuery(sql);
+                while(rs.next()) {
+                    String a=rs.getString(1);
+                    String b=rs.getString(2);
+                    String c=rs.getString(3);
+                    Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+                    errorAlert.setHeaderText("Logged in");
+                    errorAlert.setContentText("Username: "+a+"\nName: "+b+" \nEmail: "+c);
+                    errorAlert.showAndWait();
+
+                }
+
             }
 
         }
@@ -73,7 +84,7 @@ public class SampleController {
     }
     public void save_to_db(ActionEvent ae)
     {
-        if(password_create!=password2_create)
+        if(password_create.getText().equals(password2_create.getText())==false)
         {
             password2_create.setText("");
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -92,6 +103,10 @@ public class SampleController {
                 pr.setString(3, password_create.getText());
                 pr.setString(4, username_create.getText());
                 pr.executeUpdate();
+                Alert errorAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                errorAlert.setHeaderText("Success");
+                errorAlert.setContentText("Account creation successful");
+                errorAlert.showAndWait();
             } catch (Exception e) {
 
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -112,4 +127,6 @@ public class SampleController {
         primaryStage.setScene(new Scene(root, 700, 545));
         primaryStage.show();
     }
+
+
 }
